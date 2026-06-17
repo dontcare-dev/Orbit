@@ -328,39 +328,69 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:0;}
               <div class="sp-bar-bg"><div class="sp-bar-fill" id="progFill"></div></div>
             </div>
 
-            <!-- Controls -->
-            <div style="display:flex;align-items:center;justify-content:center;gap:22px;margin-top:14px;">
-              <!-- Prev (restarts) -->
-              <button onclick="restartSong()" style="background:none;border:none;cursor:pointer;padding:6px;color:#3a3a4a;transition:color .2s;" title="Restart">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+            <!-- Audio player -->
+            <audio id="spFrame" loop style="display:none;">
+              <source src="https://files.catbox.moe/537ugj.mp4" type="audio/mpeg"/>
+            </audio>
+          </div>
+
+          <!-- ── MUSIC CONTROLS (above socials) ── -->
+          <div style="
+            margin-top:14px;
+            padding:12px 14px;
+            background:rgba(0,0,0,0.3);
+            border:1px solid rgba(125,211,252,.15);
+            border-radius:14px;
+            display:flex;align-items:center;justify-content:space-between;
+          ">
+            <!-- Left: track info mini -->
+            <div style="display:flex;align-items:center;gap:9px;min-width:0;">
+              <div style="width:32px;height:32px;border-radius:6px;overflow:hidden;flex-shrink:0;
+                background:#111;box-shadow:0 2px 10px rgba(0,0,0,.6);">
+                <img src="https://i.scdn.co/image/ab67616d0000b2737d9b8f7caa0e9ebead7b4b55"
+                     style="width:100%;height:100%;object-fit:cover;" alt=""/>
+              </div>
+              <div style="min-width:0;">
+                <div style="color:#fff;font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">nyx</div>
+                <div style="color:#555;font-size:10px;white-space:nowrap;">orbit</div>
+              </div>
+            </div>
+
+            <!-- Center: controls -->
+            <div style="display:flex;align-items:center;gap:12px;">
+              <!-- Restart -->
+              <button onclick="restartSong()" style="background:none;border:none;cursor:pointer;padding:4px;color:#3a3a4a;transition:color .2s;line-height:0;"
+                onmouseover="this.style.color='#7DD3FC'" onmouseout="this.style.color='#3a3a4a'">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
               </button>
               <!-- Play / Pause -->
               <button id="ppBtn" onclick="togglePlay()" style="
-                width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;
+                width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;
                 background:linear-gradient(135deg,#7DD3FC,#C084FC);
                 display:flex;align-items:center;justify-content:center;
-                box-shadow:0 0 16px rgba(125,211,252,0.4);
-                transition:all .2s;
+                box-shadow:0 0 14px rgba(125,211,252,0.45);
+                transition:all .2s;flex-shrink:0;
               ">
-                <svg id="ppIcon" width="16" height="16" viewBox="0 0 24 24" fill="#000"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                <svg id="ppIcon" width="13" height="13" viewBox="0 0 24 24" fill="#000"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
               </button>
               <!-- Next -->
-              <button onclick="restartSong()" style="background:none;border:none;cursor:pointer;padding:6px;color:#3a3a4a;transition:color .2s;" title="Next">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zm2-8.14L11.03 12 8 14.14V9.86zM16 6h2v12h-2z"/></svg>
+              <button onclick="restartSong()" style="background:none;border:none;cursor:pointer;padding:4px;color:#3a3a4a;transition:color .2s;line-height:0;"
+                onmouseover="this.style.color='#7DD3FC'" onmouseout="this.style.color='#3a3a4a'">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zm2-8.14L11.03 12 8 14.14V9.86zM16 6h2v12h-2z"/></svg>
               </button>
             </div>
 
-            <!-- Audio player: hidden, loops the song -->
-            <iframe id="spFrame"
-              src="https://www.youtube.com/embed/8GW6sLrK40k?autoplay=1&loop=1&playlist=8GW6sLrK40k&controls=0&mute=0&enablejsapi=1"
-              width="1" height="1" frameborder="0"
-              allow="autoplay; encrypted-media"
-              style="position:absolute;opacity:0;pointer-events:none;top:-9999px;left:-9999px;">
-            </iframe>
+            <!-- Right: volume icon / mute -->
+            <button onclick="toggleMute()" id="muteBtn" style="background:none;border:none;cursor:pointer;padding:4px;color:#3a3a4a;transition:color .2s;line-height:0;"
+              onmouseover="this.style.color='#7DD3FC'" onmouseout="this.style.color='#3a3a4a'">
+              <svg id="muteIcon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+              </svg>
+            </button>
           </div>
 
-          <!-- Socials: profile + discord server only -->
-          <div class="links" style="margin-top:14px;">
+          <!-- Socials: discord + profile + projects -->
+          <div class="links" style="margin-top:10px;">
             <a class="lnk" href="https://discord.gg/kitty-1377872412972154960" target="_blank" id="discordLnk">
               <img id="discordIcon" src="" alt="discord"/>
               discord
@@ -369,6 +399,12 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:0;}
               <img id="avSmall" src="" alt="pfp" style="border-radius:50%;"/>
               profile
             </a>
+          </div>
+          <div class="links" style="margin-top:6px;">
+            <button class="lnk" onclick="openProjects()" style="width:100%;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              projects
+            </button>
           </div>
 
         </div>
@@ -616,28 +652,25 @@ const playSVG  = '<path d="M8 5v14l11-7z"/>';
 function togglePlay(){
   playing = !playing;
   if(playing){
-    // reload iframe to resume
-    frame.src = frame.src;
+    frame.play();
     ppIcon.innerHTML = pauseSVG;
-    wave.style.animationPlayState = 'running';
-    prog.style.animationPlayState = 'running';
     wave.querySelectorAll('span').forEach(s=>s.style.animationPlayState='running');
+    prog.style.animationPlayState = 'running';
   } else {
-    // blank src to stop audio
-    frame.src = '';
+    frame.pause();
     ppIcon.innerHTML = playSVG;
-    wave.style.animationPlayState = 'paused';
-    prog.style.animationPlayState = 'paused';
     wave.querySelectorAll('span').forEach(s=>s.style.animationPlayState='paused');
+    prog.style.animationPlayState = 'paused';
   }
 }
 
 function restartSong(){
   playing = true;
-  frame.src = 'https://www.youtube.com/embed/8GW6sLrK40k?autoplay=1&loop=1&playlist=8GW6sLrK40k&controls=0&mute=0&enablejsapi=1';
+  frame.currentTime = 0;
+  frame.play();
   ppIcon.innerHTML = pauseSVG;
   prog.style.animation = 'none';
-  prog.offsetHeight; // reflow
+  prog.offsetHeight;
   prog.style.animation = 'prog 238s linear infinite';
   wave.querySelectorAll('span').forEach(s=>s.style.animationPlayState='running');
 }
@@ -655,7 +688,156 @@ banner.style.background = '';
 document.getElementById('spIcon').src = SPOTIFY_B64;
 document.getElementById('discordIcon').src = DISCORD_B64;
 
-console.log('%c[orbit] To set your banner: host image 1 (dark anime art) on imgur.com then set bannerImg.src in the script.', 'color:#7DD3FC;font-family:monospace;');
+
+</script>
+<!-- ══ PROJECTS PAGE OVERLAY ══════════════════════════════════════ -->
+<div id="projectsPage" style="
+  display:none;
+  position:fixed;inset:0;z-index:9999;
+  font-family:'Inter',sans-serif;
+  color:#fff;
+  overflow:hidden;
+">
+  <!-- Video background -->
+  <video autoplay muted loop playsinline id="projBg" style="
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;z-index:0;
+    filter:brightness(0.35) saturate(1.2);
+  ">
+    <source src="https://www.image2url.com/r2/default/videos/1781648248138-f7b5eed4-99f8-49ee-bede-e40ae3d471e1.mp4" type="video/mp4"/>
+  </video>
+
+  <!-- Noise overlay -->
+  <div style="position:absolute;inset:0;z-index:1;background:rgba(3,3,3,0.45);backdrop-filter:blur(1px);"></div>
+
+  <!-- Scanlines -->
+  <div style="position:absolute;inset:0;z-index:2;opacity:.022;pointer-events:none;
+    background:repeating-linear-gradient(0deg,#000 0,#000 1px,transparent 1px,transparent 3px);"></div>
+
+  <!-- Content -->
+  <div style="position:relative;z-index:10;height:100%;display:flex;flex-direction:column;">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 28px 0;">
+      <div>
+        <div style="color:#7DD3FC;font-size:9px;letter-spacing:.35em;font-family:monospace;margin-bottom:4px;">◈ ORBITAL ARCHIVE</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-.03em;">projects</div>
+      </div>
+      <button onclick="closeProjects()" style="
+        background:rgba(255,255,255,.05);border:1px solid rgba(125,211,252,.22);
+        border-radius:9px;color:#A1A1AA;font-size:11px;padding:8px 16px;
+        cursor:pointer;font-family:inherit;letter-spacing:.1em;
+        transition:all .2s;
+      "
+      onmouseover="this.style.color='#fff';this.style.borderColor='rgba(125,211,252,.5)'"
+      onmouseout="this.style.color='#A1A1AA';this.style.borderColor='rgba(125,211,252,.22)'"
+      >✕ close</button>
+    </div>
+
+    <!-- Divider -->
+    <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(125,211,252,.25),transparent);margin:18px 0 20px;"></div>
+
+    <!-- Project cards scroll area -->
+    <div style="flex:1;overflow-y:auto;padding:0 24px 32px;display:flex;flex-direction:column;gap:18px;">
+
+      <!-- KITTY AI card -->
+      <div id="projCard" style="
+        border-radius:16px;
+        border:1px solid rgba(125,211,252,.18);
+        background:linear-gradient(135deg,rgba(10,10,18,.88),rgba(6,6,14,.94));
+        backdrop-filter:blur(22px);
+        overflow:hidden;
+        transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease,border-color .35s ease;
+        cursor:pointer;
+      "
+      onmouseover="this.style.transform='translateY(-4px) scale(1.01)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5),0 0 30px rgba(125,211,252,.15)';this.style.borderColor='rgba(125,211,252,.38)'"
+      onmouseout="this.style.transform='none';this.style.boxShadow='none';this.style.borderColor='rgba(125,211,252,.18)'"
+      onclick="window.open('https://kitty-ai-eight.vercel.app/','_blank')"
+      >
+        <!-- Screenshot preview -->
+        <div style="position:relative;width:100%;height:160px;overflow:hidden;background:#080812;">
+          <img src="https://i.ibb.co/8CM6WJv/Screenshot-20260617-040510-Samsung-Internet.jpg"
+               alt="kitty-ai preview"
+               style="width:100%;height:100%;object-fit:cover;object-position:top;opacity:.85;display:block;"
+               onerror="this.parentElement.style.background='#0a0a18'"
+          />
+          <!-- Gradient fade at bottom -->
+          <div style="position:absolute;bottom:0;left:0;right:0;height:60px;
+            background:linear-gradient(to bottom,transparent,rgba(10,10,18,.95));pointer-events:none;"></div>
+          <!-- Live badge -->
+          <div style="position:absolute;top:10px;right:10px;background:rgba(34,197,94,.15);
+            border:1px solid rgba(34,197,94,.4);border-radius:20px;
+            padding:3px 9px;font-size:9px;font-family:monospace;letter-spacing:.15em;
+            color:#22C55E;display:flex;align-items:center;gap:5px;">
+            <div style="width:5px;height:5px;border-radius:50%;background:#22C55E;box-shadow:0 0 6px #22C55E;animation:pulse 2s infinite;"></div>
+            LIVE
+          </div>
+        </div>
+
+        <!-- Card body -->
+        <div style="padding:18px 20px 20px;">
+          <div style="color:#7DD3FC;font-size:9px;letter-spacing:.28em;font-family:monospace;margin-bottom:8px;">AI · WEB APP</div>
+          <div style="font-size:19px;font-weight:800;letter-spacing:-.025em;margin-bottom:8px;">kitty ai</div>
+          <p style="color:#71717A;font-size:12px;line-height:1.65;margin:0 0 16px;">
+            An AI-powered web experience. Click to explore the live deployment.
+          </p>
+          <!-- Tech tags -->
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;">
+            <span style="color:#A1A1AA;font-size:10px;padding:3px 9px;background:rgba(255,255,255,.04);border-radius:40px;border:1px solid rgba(255,255,255,.07);">AI</span>
+            <span style="color:#A1A1AA;font-size:10px;padding:3px 9px;background:rgba(255,255,255,.04);border-radius:40px;border:1px solid rgba(255,255,255,.07);">Web</span>
+            <span style="color:#A1A1AA;font-size:10px;padding:3px 9px;background:rgba(255,255,255,.04);border-radius:40px;border:1px solid rgba(255,255,255,.07);">Vercel</span>
+          </div>
+          <!-- CTA -->
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="color:#7DD3FC;font-size:11px;font-weight:600;letter-spacing:.08em;">kitty-ai-eight.vercel.app</span>
+            <div style="display:flex;align-items:center;gap:5px;color:#7DD3FC;font-size:11px;letter-spacing:.08em;">
+              visit
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Placeholder / more coming soon -->
+      <div style="
+        border-radius:16px;border:1px dashed rgba(125,211,252,.12);
+        padding:28px 20px;text-align:center;
+        background:rgba(10,10,18,.4);
+      ">
+        <div style="color:#3F3F46;font-size:11px;letter-spacing:.18em;font-family:monospace;margin-bottom:6px;">MORE INCOMING</div>
+        <div style="color:#27272A;font-size:10px;letter-spacing:.1em;">— stay tuned —</div>
+      </div>
+
+    </div><!-- /scroll area -->
+  </div><!-- /content -->
+</div><!-- /projectsPage -->
+
+<style>
+#projectsPage{animation:none;}
+@keyframes projIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+#projectsPage.show{animation:projIn .45s cubic-bezier(.16,1,.3,1) both;}
+</style>
+
+<script>
+function openProjects(){
+  const p=document.getElementById('projectsPage');
+  p.style.display='block';
+  // Restart animation
+  p.classList.remove('show');
+  void p.offsetWidth;
+  p.classList.add('show');
+  // Play video
+  const v=document.getElementById('projBg');
+  if(v) v.play().catch(()=>{});
+}
+function closeProjects(){
+  const p=document.getElementById('projectsPage');
+  p.style.opacity='0';
+  p.style.transition='opacity .3s ease';
+  setTimeout(()=>{p.style.display='none';p.style.opacity='';p.style.transition='';},300);
+}
+// Close on Escape
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProjects();});
 </script>
 </body>
 </html>
