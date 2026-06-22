@@ -158,6 +158,15 @@
   }
 
   #loadingScreen{
+    position:fixed; inset:0;
+    z-index:999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:18px;
+    overflow:hidden;
+    background:#050c28;
     transition: opacity 0.6s ease, visibility 0.6s ease;
   }
   #loadingScreen.hide{
@@ -502,7 +511,7 @@
 <main class="stage">
   <div class="card" id="card">
     <div class="banner-wrap">
-      <img class="banner" src="https://i.ibb.co/SwBZwLZL/40d5429f161eea1bd948f0d5d19de08e.jpg" alt="">
+      <img class="banner" src="https://i.ibb.co/bg32rFW8/5e6c213770d344f2c025e3dc68419322.jpg" alt="">
       <div class="banner-fade"></div>
     </div>
     <div class="avatar-wrap">
